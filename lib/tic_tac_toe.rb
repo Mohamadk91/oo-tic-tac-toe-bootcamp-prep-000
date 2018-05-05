@@ -1,71 +1,80 @@
-WIN_COMBINATIONS = [
-  [0,1,2],
-  [0,3,6],
-  [0,4,8],
-  [1,4,7],
-  [2,5,8],
-  [3,4,5],
-  [6,7,8],
-  [6,4,2]
-]
-
 class TicTacToe
-
-  def initialize(board = nil)
-    @board = board || Array.new(9, " ")
+  def initialize(board = [" "," "," "," "," "," "," "," "," "])
+    @board = board
   end
-
-  def board
-    @board
-  end
+  WIN_COMBINATIONS = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,4,8],
+      [2,4,6],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8]
+  ]
 
   def display_board
-    puts   " #{@board[0]} | #{@board[1]} | #{@board[2]} "
-    puts              "-----------"
-    puts   " #{@board[3]} | #{@board[4]} | #{@board[5]} "
-    puts              "-----------"
-    puts   " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+    puts "-----------"
+    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    puts "-----------"
+    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
 
-
-  def move(location, token="X")
-    @board[location.to_i-1] = token
+  def input_to_index(input)
+    index = input.to_i - 1
   end
 
-  def position_taken?(location)
-    if !(@board[location].nil? || @board[location] == " " || @board[location] == "")
-      true
+  def move(index,value = "X")
+    @board[index] = value
+  end
+  def position_taken?(int)
+    if @board[int] == " " || @board[int] == "" || @board[int] == nil
+      return false
     else
-      false
+      return true
     end
   end
 
-  def valid_move?(location)
-    location.to_i.between?(1,9) && !position_taken?(location.to_i-1)
-  end
-
-  def turn
-      puts "Please enter 1-9:"
-      location = gets.strip
-    if valid_move?(location)
-      move(location, current_player)
+  def valid_move?(int)
+    if position_taken?(int)
+      return false
+    elsif int <9 && int >= 0
+      return true
     else
-        turn
+      return false
     end
-      display_board
   end
 
   def turn_count
-    @board.count{|turns| turns=="X" || turns=="O"}
+    count = 0
+    @board.each{ |space|
+    if space != "" && space != " " && space != nil
+      count += 1
+    end}
+    return count
   end
-
   def current_player
-     turn_count % 2 == 0 ? "X" : "O"
+    if turn_count.even?
+      return "X"
+    else
+      return "O"
+    end
   end
 
+  def turn
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+    if valid_move?(index) == true
+      move(index,current_player)
+      display_board
+    else
+      turn
+    end
+  end
   def won?
-
-    WIN_COMBINATIONS.each do | win_combination |
+    WIN_COMBINATIONS.each do |win_combination|
 
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
@@ -79,48 +88,55 @@ class TicTacToe
         return win_combination
       elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
         return win_combination
+      else
+         false
       end
     end
-    false
+    return false
   end
 
   def full?
-    if @board.all? { |all| all == "X" || all == "O" } && !won?
+    @board.all? { |space|
+      space == "X" || space == "O"  }
+  end
+
+  def draw?
+    if full? == true && won? == false
       return true
     else
       return false
     end
   end
 
-  def draw?
-    full? && !won?
-  end
-
   def over?
-      draw? || won?
+    if won? != false || full? == true
+      return true
+    else
+      false
+    end
   end
 
   def winner
-    WIN_COMBINATIONS.each do |win_combo|
-      if win_combo.all? {|index| @board[index] == "X" }
-         return "X"
-      elsif win_combo.all? {|index| @board[index] == "O"}
-         return  "O"
-      end
-      end
-      nil
+    if won? == false
+      return nil
+    else
+      win_array = won?
+    end
+    if @board[win_array[0]] == "X"
+      return "X"
+    else
+      return "O"
+    end
   end
 
   def play
-    while !over?
+    until over? == true || draw? == true
       turn
     end
-    if won?
-       puts "Congratulations #{winner}!"
-    elsif draw?
-       puts "Cats Game!"
+    if won? != false
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
     end
   end
-
-
 end
