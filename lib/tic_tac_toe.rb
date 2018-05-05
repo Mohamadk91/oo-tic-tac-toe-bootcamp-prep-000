@@ -1,22 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Apps
-Explore
- @Mohamadk91
-Sign out
-1
-0 1,057 latinadeveloper/oo-tic-tac-toe-v-000
-forked from learn-co-students/oo-tic-tac-toe-v-000
- Code  Pull requests 0  Projects 0  Wiki  Insights
-oo-tic-tac-toe-v-000/lib/tic_tac_toe.rb
-35f6a4b  on Mar 23, 2017
-@latinadeveloper latinadeveloper Done.
-@aviflombaum @latinadeveloper
-
-117 lines (92 sloc)  1.9 KB
 class TicTacToe
   attr_accessor :board
 
@@ -117,7 +98,7 @@ class TicTacToe
    end
 
    def play
-     until over? || draw? 
+     until over? || draw?
        display_board
         turn
      end
