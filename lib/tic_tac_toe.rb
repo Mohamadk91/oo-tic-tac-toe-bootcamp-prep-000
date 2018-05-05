@@ -15,7 +15,7 @@ oo-tic-tac-toe-v-000/lib/tic_tac_toe.rb
 35f6a4b  on Mar 23, 2017
 @latinadeveloper latinadeveloper Done.
 @aviflombaum @latinadeveloper
-     
+
 117 lines (92 sloc)  1.9 KB
 class TicTacToe
   attr_accessor :board
@@ -117,7 +117,7 @@ class TicTacToe
    end
 
    def play
-     until over? || draw? ## draw added to pass test
+     until over? || draw? 
        display_board
         turn
      end
