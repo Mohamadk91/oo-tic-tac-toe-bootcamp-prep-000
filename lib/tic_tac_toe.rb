@@ -32,6 +32,7 @@ class TicTacToe
       return true
     end
   end
+
   def valid_move?(int)
     if position_taken?(int)
       return false
@@ -41,6 +42,7 @@ class TicTacToe
       return false
     end
   end
+
   def turn_count
     count = 0
     @board.each{ |space|
