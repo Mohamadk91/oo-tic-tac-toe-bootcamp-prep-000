@@ -122,6 +122,7 @@ class TicTacToe
       return "O"
     end
   end
+
   def play
     until over? == true || draw? == true
       turn
