@@ -107,7 +107,7 @@ class TicTacToe
        puts "Congratulations #{winner}!"
 
      else
-       puts "Cat's Game!"
+       puts "Cats Game!"
      end
    end
 end
