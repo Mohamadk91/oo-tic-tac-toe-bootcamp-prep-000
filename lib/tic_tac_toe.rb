@@ -69,15 +69,15 @@ class TicTacToe
     end
     def won?
       WIN_COMBINATIONS.each do |win_combination|
-        
+
         win_index_1 = win_combination[0]
         win_index_2 = win_combination[1]
         win_index_3 = win_combination[2]
-        
+
         position_1 = @board[win_index_1]
         position_2 = @board[win_index_2]
         position_3 = @board[win_index_3]
-        
+
         if position_1 == "X" && position_2 == "X" && position_3 == "X"
           return win_combination
         elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
@@ -88,12 +88,12 @@ class TicTacToe
       end
       return false
     end
-    
+
     def full?
       @board.all? { |space|
         space == "X" || space == "O"  }
       end
-      
+
       def draw?
         if full? == true && won? == false
           return true
@@ -101,7 +101,7 @@ class TicTacToe
           return false
         end
       end
-      
+
       def over?
         if won? != false || full? == true
           return true
@@ -109,7 +109,7 @@ class TicTacToe
           false
         end
       end
-      
+
       def winner
         if won? == false
           return nil
