@@ -12,12 +12,12 @@ WIN_COMBINATIONS = [
 class TicTacToe
 
   def initialize(board = nil)
-    @board = board || Array.new(9, " ") 
-  end 
+    @board = board || Array.new(9, " ")
+  end
 
   def board
     @board
-  end 
+  end
 
   def display_board
     puts   " #{@board[0]} | #{@board[1]} | #{@board[2]} "
@@ -26,11 +26,11 @@ class TicTacToe
     puts              "-----------"
     puts   " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
- 
+
 
   def move(location, token="X")
-    @board[location.to_i-1] = token 
-  end 
+    @board[location.to_i-1] = token
+  end
 
   def position_taken?(location)
     if !(@board[location].nil? || @board[location] == " " || @board[location] == "")
@@ -49,7 +49,7 @@ class TicTacToe
       location = gets.strip
     if valid_move?(location)
       move(location, current_player)
-    else   
+    else
         turn
     end
       display_board
